@@ -10,7 +10,7 @@ let maxCount = undefined;
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", async function (e) {
-    let promise = await fetch("https://japdevdep.github.io/ecommerce-api/product/all.json");//hecho por mí desde aquí
+    let promise = await fetch(PRODUCTS_URL);//hecho por mí desde aquí
     todosLosProductos = await promise.json();
     currentProductsArray = todosLosProductos;
     showProductsList(currentProductsArray);
@@ -77,8 +77,8 @@ function filtrarProductosPorNombre(valorABuscar) {
             filtrados.push(currentProductsArray[i]);
         }
     }
-    currentProductsArray = filtrados;
-    showProductsList(currentProductsArray);
+    //currentProductsArray = filtrados;
+    showProductsList(filtrados);
 }
 
 function filtrarProducts() {
@@ -141,6 +141,6 @@ function showProductsList(data_products) {
     }
 }
 
-function sortAndShowProducts() {
+/*function sortAndShowProducts() {
     sortProducts()
-}
+}*/

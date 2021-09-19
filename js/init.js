@@ -40,12 +40,12 @@ var getJSONData = function (url) {
     });
 }
 
-function redireccionar() {
+/* function redireccionar() {
   debugger;
   if (localStorage.getItem("user") == null) {
     location.href = "login.html";
   }
-}
+} */
 
 function cerrarSesion() {
   localStorage.removeItem("user");
