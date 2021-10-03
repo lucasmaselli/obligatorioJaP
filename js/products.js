@@ -77,7 +77,6 @@ function filtrarProductosPorNombre(valorABuscar) {
             filtrados.push(currentProductsArray[i]);
         }
     }
-    //currentProductsArray = filtrados;
     showProductsList(filtrados);
 }
 
@@ -140,7 +139,3 @@ function showProductsList(data_products) {
         document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
     }
 }
-
-/*function sortAndShowProducts() {
-    sortProducts()
-}*/

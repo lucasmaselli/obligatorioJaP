@@ -9,11 +9,10 @@ function validarDatos() {
   let usuario = document.getElementById("inputEmail").value;
   let password = document.getElementById("inputPassword").value;
 
-  if (usuario != '' && password != '') {
-    if (usuario.includes('@') && usuario.includes('.com')) {
+  if (usuario != '' && password != '') {//Valida que los campos no están vacíos
+    if (usuario.includes('@') && usuario.includes('.com')) {//Validar que el usuario contenga '@' y '.gmail'
       localStorage.setItem("user", usuario);
       location.href = 'index.html';
-      //window.open('index.html');
     } else {
       alert("El correo no es correcto");
     }

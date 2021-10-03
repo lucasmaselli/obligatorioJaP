@@ -40,13 +40,6 @@ var getJSONData = function (url) {
     });
 }
 
-/* function redireccionar() {
-  debugger;
-  if (localStorage.getItem("user") == null) {
-    location.href = "login.html";
-  }
-} */
-
 function cerrarSesion() {
   localStorage.removeItem("user");
   location.href = "login.html";
@@ -56,8 +49,7 @@ function cerrarSesion() {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-  if (localStorage.getItem("user") != null) {
-    document.getElementById("user").textContent = localStorage.getItem("user");
-    document.getElementById("user").style = "color: white";
+  if (localStorage.getItem("user") != null) { //Verificar si existe un usuario logueado
+    document.getElementById("dropdownMenuButton").textContent = localStorage.getItem("user");
   }
 });

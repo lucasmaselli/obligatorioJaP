@@ -20,24 +20,29 @@ document.addEventListener("DOMContentLoaded", async function (e) {
     showComments();
     showRelatedProducts();
 
-    document.getElementById("new-comment").style.visibility = "visible";
+    document.getElementById("new-comment").style.visibility = "visible";//Hace visible el elemento oculto
     document.getElementById("comments").style.visibility = "visible";
     document.getElementById("related-products").style.visibility = "visible";
 
-    document.getElementById("comentar").addEventListener("click", function () {
-        let puntuacion = document.getElementById("puntuacion").value;
-        let descripcion = document.getElementById("comentario").value;
-        let fechaActual = takeDate();
-        let nuevoComentario = {
-            score: puntuacion,
-            description: descripcion,
-            user: localStorage.getItem("user"),
-            dateTime: fechaActual
+    document.getElementById("comentar").addEventListener("click", function () {//Función para agragar nuevo comentario
+        if (document.getElementById("comentario").value != "") {
+            let puntuacion = document.getElementById("puntuacion").value;
+            let descripcion = document.getElementById("comentario").value;
+            let fechaActual = takeDate();
+            let nuevoComentario = {//Creo nuevo objeto comentario
+                score: puntuacion,
+                description: descripcion,
+                user: localStorage.getItem("user"),
+                dateTime: fechaActual
+            }
+            currentCommentsList.push(nuevoComentario);//Agrego el nuevo comentario a la lista de comentario
+            document.getElementById("puntuacion").value = '1';//Seteo valor por defecto
+            document.getElementById("comentario").value = "";
+            showComments();
         }
-        currentCommentsList.push(nuevoComentario);
-        document.getElementById("puntuacion").value = '1';
-        document.getElementById("comentario").value = "";
-        showComments();
+        else {
+            alert("Debe ingresar un comentario");
+        }
     });
 
 });
@@ -59,20 +64,46 @@ function showProduct() {
             <p> ${currentProduct.description} </p>
             <p class="second-info"> Precio: ${currentProduct.currency} ${currentProduct.cost} / Cantidad vendidos: ${currentProduct.soldCount} 
             / Categoría del producto: ${currentProduct.category} </p>
-            <div class="images">`
-    for (let i = 0; i < currentProduct.images.length; i++) {
-        let image = currentProduct.images[i];
-        htmlContentToAppend += `<img src="${image}">`
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">`
+    for (let j = 0; j < currentProduct.images.length; j++) {//Recorro las imágenes del producto para crear los indicadores del carrusel
+        if (j == 0) {
+            htmlContentToAppend += `<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>`
+        }
+        else {
+            htmlContentToAppend += `<li data-target="#carouselExampleIndicators" data-slide-to="${j}"></li>`
+        }
     }
-    htmlContentToAppend += `</div>`;
+    htmlContentToAppend += `
+                </ol>
+            <div class="carousel-inner">`
+    for (let i = 0; i < currentProduct.images.length; i++) {//Recorro las imágenes del producto agragarlas al html
+        let image = currentProduct.images[i];
+        if (i == 0) {
+            htmlContentToAppend += `
+                <div class="carousel-item active">
+                <img src="${image}" class="d-block w-100" alt="">
+            </div>`
+        }
+        else {
+            htmlContentToAppend += `
+            <div class="carousel-item">
+                <img src="${image}" class="d-block w-100" alt="">
+            </div>`
+        }
+    }
+    htmlContentToAppend += `
+            </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+                </a>
+            </div>`;
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
-    /*<span onmouseover="" class="fa fa-star"></span>
-    <span class="fa fa-star"></span>
-    <span class="fa fa-star"></span>
-    <span class="fa fa-star"></span>
-    <span class="fa fa-star"></span>
-    <button id="comentar" type="button">Comentar</button>
-    <hr>`*/
 }
 
 function showComments() {
@@ -81,11 +112,11 @@ function showComments() {
 
     htmlContentToAppend = `
             <h3>Comentarios</h3>`
-    for (let i = 0; i < currentCommentsList.length; i++) {
+    for (let i = 0; i < currentCommentsList.length; i++) {//Recorro los comentarios del producto
         let comment = currentCommentsList[i];
         htmlContentToAppend += `<h5> Usuario: ${comment.user}</h5>
         <p>Fecha: ${comment.dateTime}</p>`
-        for (let j = 1; j <= 5; j++) {
+        for (let j = 1; j <= 5; j++) {//Para crear las estrellas
             if (j <= comment.score) {
                 htmlContentToAppend += `<span class="fa fa-star checked"></span>`
             }
@@ -105,7 +136,7 @@ function showRelatedProducts() {
 
     htmlContentToAppend = `<h3>Productos relacionados</h3>`
 
-    for (let i = 0; i < currentProduct.relatedProducts.length; i++) {
+    for (let i = 0; i < currentProduct.relatedProducts.length; i++) {//Recorro los productos relacionados
         let indexRelatedProduct = currentProduct.relatedProducts[i];
         htmlContentToAppend += `<a href="">
                 <img src="${productsList[indexRelatedProduct].imgSrc}">

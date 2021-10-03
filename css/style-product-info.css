@@ -17,15 +17,10 @@ button {
     color: orange;
   }
 
-.images {    
-    background-color: antiquewhite;
+.carousel-inner {
     border-radius: 20px;
-}
-
-img {
-    width:288px;
-    margin: 20px;
-    border-radius: 20px;
+    border-style: solid;
+    border-color: lightsteelblue;
 }
 
 #product-info {    
