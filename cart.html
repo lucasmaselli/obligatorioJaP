@@ -16,6 +16,7 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="css/style-cart.css">
 
   <style>
     .bd-placeholder-img {
@@ -47,7 +48,8 @@
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
@@ -57,12 +59,50 @@
     </div>
   </nav>
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
+    <form id="currency" onchange="convertCurrency()">
+      <p>Elija en que moneda desea ver los valores de los productos</p>
+      <input type="radio" name="currency" id="UYU" checked>
+      <label for="UYU">UYU</label><br>
+      <input type="radio" name="currency" id="USD">
+      <label for="USD">USD</label><br>
+    </form>
+    <h2 class="miCarrito">Mi carrito</h2>
+    <table id="articles" border="0" width="100%">
+      
+    </table>
+    <h3>Subtotal del carrito: <span class="currency"></span><span id="cartSubtotal"></span></h3>
+    <hr>
+    <form id="shippingTypeForm" onchange="calculateCartTotal()">
+      <h2>Tipo de envío</h2>
+      <input type="radio" name="shippingType" id="premium" checked>
+      <label for="premium"> Premium - 2 a 5 días (15%)</label><br>
+      <input type="radio" name="shippingType" id="express">
+      <label for="express"> Express - 5 a 8 días (7%)</label><br>
+      <input type="radio" name="shippingType" id="standard">
+      <label for="standard"> Standard - 12 a 15 días (5%)</label><br>
+    </form>
+    <form>
+      <h2>Dirección de envío</h2>
+      <label for="street">Calle</label><br>
+      <input type="text" id="street"><br>
+      <label for="number">Número</label><br>
+      <input type="text" id="number"><br>
+      <label for="corner">Esquina</label><br>
+      <input type="text" id="corner">
+    </form>
+    <hr>
+    <form>
+      <h2>Costos</h2>
+      <span>Subtotal del carrito: </span><span class="currency"></span><span id="subCart"></span><br>
+      <span>Costo de envío: </span><span class="currency"></span><span id="shippingCost"></span><br>
+      <span>Costo total: </span><span class="currency"></span><span id="totalCost"></span>
+    </form>
+    <!--<div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
       <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
       <hr>
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
+    </div>-->
   </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
