@@ -114,28 +114,24 @@ function showProductsList(data_products) {
                 ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))) {
 
                 htmlContentToAppend += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ product.name + `</h4>
+                <div class="col-12 col-md-6 col-xl-4 col mt-3" >
+                    <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+                        <div class="card-header d-flex w-100 justify-content-between">
+                            <h4 class="m-1">`+ product.name + `</h4>
                             <small class="text-muted">` + product.currency + ` ` + product.cost + `</small>
                         </div>
-                        <p class="mb-1">` + product.description + `</p>
-                    </div>
+                        <img src="` + product.imgSrc + `" alt="` + product.description + `">                        
+                        <p class="m-3">` + product.description + `</p>
+                    </a>
                 </div>
-            </a>
             `
             }
 
-            document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;//Línea 78
+            document.getElementById("prod-container").innerHTML = htmlContentToAppend;//Línea 78
         }
     }
     else {
         htmlContentToAppend = `<h3>No hay resultados para su búsqueda</h3>`;
-        document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
+        document.getElementById("prod-container").innerHTML = htmlContentToAppend;
     }
 }

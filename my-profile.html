@@ -56,20 +56,24 @@
       </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
+  <div class="container">
+    <h1 style="margin-bottom: 20px;">Mi perfil</h1>
+      <form action="">
+        <label for="name">Nombre</label>
+        <input type="text" id="name"><br>
+        <label for="lastName">Apellido</label>
+        <input type="text" id="lastName"><br>
+        <label for="age">Edad</label>
+        <input type="number" id="age"><br>
+        <label for="email">Email</label>
+        <input type="email" id="email"><br>
+        <label for="phone">Teléfono</label>
+        <input type="tel" id="phone"><br>
+        <input type="file" id="fileSelector" onchange="uploadImage()">
+        <img id="profileImage" src="" alt=""><br>
+        <input type="button" onclick="validate()" value="Enviar">
+      </form>
   </div>
-  <footer class="text-muted bg-light">
-    <div class="container">
-      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
-  </footer>
   <div class="alert fade alert-success" role="alert" id="alertResult">
     <span id="resultSpan"></span>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

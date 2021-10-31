@@ -41,7 +41,7 @@ var getJSONData = function (url) {
 }
 
 function cerrarSesion() {
-  localStorage.removeItem("user");
+  localStorage.clear();
   location.href = "login.html";
 }//Agragado por mí
 
