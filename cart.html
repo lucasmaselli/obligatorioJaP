@@ -68,7 +68,7 @@
     </form>
     <h2 class="miCarrito">Mi carrito</h2>
     <table id="articles" border="0" width="100%">
-      
+
     </table>
     <h3>Subtotal del carrito: <span class="currency"></span><span id="cartSubtotal"></span></h3>
     <hr>
@@ -83,12 +83,14 @@
     </form>
     <form>
       <h2>Dirección de envío</h2>
-      <label for="street">Calle</label><br>
+      <label for="street">Calle*</label><br>
       <input type="text" id="street"><br>
-      <label for="number">Número</label><br>
+      <label for="number">Número*</label><br>
       <input type="text" id="number"><br>
       <label for="corner">Esquina</label><br>
       <input type="text" id="corner">
+      <br>
+      <small>* Campo obligatorio</small>
     </form>
     <hr>
     <form>
@@ -97,12 +99,40 @@
       <span>Costo de envío: </span><span class="currency"></span><span id="shippingCost"></span><br>
       <span>Costo total: </span><span class="currency"></span><span id="totalCost"></span>
     </form>
-    <!--<div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>-->
+    <!-- Button trigger modal -->
+    <h2>Método de pago</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+      Seleccionar método de pago
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">¿Cómo desea abonar?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="radio" id="credit_pay" name="pay"> <label for="credit_pay"> Tarjeta de crédito</label></input><br>
+            Número de tarjeta <br><input type="text" name="num_card" id="num_card" disabled><br>
+            Fecha de vencimiento (MM/AA) <br><input type="text" name="due_date" id="due_date" disabled><br>
+            Código de seguridad <br><input type="text" name="security_code" id="security_code" disabled><br>
+            <hr>
+            <input type="radio" id="transfer_pay" name="pay"> <label for="transfer_pay"> Transferencia bancaria</label></input><br>
+            Número de cuenta <br>
+            <input type="text" name="count_num" id="count_num" disabled>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" onclick="validatePay()" class="btn btn-primary">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <input type="button" id="confirm_purchase" value="Finalizar compra">
   </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">

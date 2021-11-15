@@ -37,6 +37,7 @@ function showCart() { //Funcion para recorrer los productos y crear los elemento
             <td><input id="input${id}" class="input" type="number" value="${article.count}" min="1" data-currency="${article.currency}" data-unitcost="${article.unitCost}" data-id="${id}" onchange="calculateProductSubtotal(this.dataset.unitcost, this.value, this.dataset.id)"></td>
             <td><span class="currency">${article.currency}</span> <span class="price" id="unitCost${id}">${article.unitCost}</span></td>
             <td><span class="currency">${article.currency}</span> <span class="price" id="subtotal${id}">${subtotal}</span></td>
+            <td><input type="button" value="Quitar" data-id="${id}" onclick="removeItem(this.dataset.id)"></td>
         </tr>`
             id++;
         }
@@ -48,6 +49,7 @@ function showCart() { //Funcion para recorrer los productos y crear los elemento
                 <td><input id="input${id}" class="input" type="number" value="${article.count}" min="1" data-currency="${article.currency}" data-unitcost="${article.unitCost}" data-id="${id}" onchange="calculateProductSubtotal(this.dataset.unitcost, this.value, this.dataset.id)"></td>
                 <td><span class="currency">${article.currency}</span> <span class="price" id="unitCost${id}">${article.unitCost}</span></td>
                 <td><span class="currency">${article.currency}</span> <span class="price" id="subtotal${id}">${subtotal}</span></td>
+                <td><input type="button" value="Quitar" data-id="${id}" onclick="removeItem(this.dataset.id)"></td>
             </tr>`
             id++;
         }
@@ -149,5 +151,109 @@ function convertCurrency() { //Recorre los subtotales de los productos del carri
     }
 
     calculateCartSubtotal(); //Calculo el subtotal del carrito con los nuevos subtotales de los productos
+
+}
+
+document.getElementById("credit_pay").addEventListener("click", function () {//Habilita inputs para pagar con tarjeta de crédito
+
+    document.getElementById("num_card").disabled = false;
+    document.getElementById("due_date").disabled = false;
+    document.getElementById("security_code").disabled = false;
+    document.getElementById("count_num").disabled = true;
+    document.getElementById("count_num").value = '';
+
+});
+
+
+document.getElementById("transfer_pay").addEventListener("click", function () {//Habilita inputs para pagar con transferencia bancaria
+
+    document.getElementById("count_num").disabled = false;
+    document.getElementById("num_card").disabled = true;
+    document.getElementById("due_date").disabled = true;
+    document.getElementById("security_code").disabled = true;
+    document.getElementById("num_card").value = '';
+    document.getElementById("due_date").value = '';
+    document.getElementById("security_code").value = '';
+
+});
+
+function validatePay() {//Valida que estén los datos necesarios del método de pago
+
+    let creditPay = document.getElementById("credit_pay");
+    let transferPay = document.getElementById("transfer_pay");
+
+    if (creditPay.checked == true) {
+
+        let numCard = document.getElementById("num_card");
+        let dueDate = document.getElementById("due_date");
+        let securityCode = document.getElementById("security_code");
+
+        if (numCard.value == '') {
+
+            alert("Debe ingresar el número de tarjeta");
+
+        } else if (dueDate.value == '') {
+
+            alert("Debe ingresar la fecha de vencimiento");
+
+        } else if (securityCode.value == '') {
+
+            alert ("Debe ingresar el código de seguridad");
+            
+        } else {
+            alert("Datos ingresados correctamente");
+        }
+
+    } else if (transferPay.checked == true) {
+
+        let countNum = document.getElementById("count_num");
+
+        if (countNum.value == '') {
+
+            alert ("Debe ingresar el número de cuenta");
+            
+        }
+        else {
+
+            alert("Datos ingresados correctamente");
+
+        }
+        
+    }
+
+}
+
+document.getElementById("confirm_purchase").addEventListener("click", function () {//Valida datos de dirección y confirma la compra
+
+    let street = document.getElementById("street");
+    let adressNum = document.getElementById("number");
+    let creditPay = document.getElementById("credit_pay");
+    let transferPay = document.getElementById("transfer_pay");
+
+    if (street.value == '') {
+
+        alert("Debe especificar una calle para la dirección");
+        
+    } else if (adressNum.value == '') {
+        
+        alert("Debe especificar un número para la dirección");
+
+    } else if (creditPay.checked == false && transferPay.checked == false) {
+
+        alert("Debe seleccionar un método de pago");
+        
+    } else {
+
+        validatePay();
+        
+    }
+
+});
+
+function removeItem(positionToRemove) {//Elimina el item seleccionado del array de productos y llama a las funciones para cargar los datos y calcular los costos nuevamente
+
+    cart.articles.splice(positionToRemove, 1);
+    showCart();
+    convertCurrency(); 
 
 }

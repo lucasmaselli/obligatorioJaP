@@ -3,7 +3,7 @@
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
 
-    let profile = JSON.parse(localStorage.getItem("profile"));
+    let profile = JSON.parse(localStorage.getItem("profile"));//Tomo datos del localStorage
 
     if (profile != null) {
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 });
 
-function validate() {
+function validate() {//Funcion para tomar los datos del perfil y guardarlos en localStorage
 
     let name = document.getElementById("name").value;
     let lastName = document.getElementById("lastName").value;

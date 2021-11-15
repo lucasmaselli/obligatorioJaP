@@ -29,3 +29,12 @@ th {
     text-align: center;
     border-bottom-style: inset;
 }
+
+.background_modal {
+    display: none;
+    z-index: 100;
+}
+
+.modal_window {
+    border: solid;
+}
